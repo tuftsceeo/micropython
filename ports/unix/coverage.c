@@ -220,6 +220,7 @@ static mp_obj_t extra_coverage(void) {
         mp_printf(&mp_plat_print, "%X\n", 0x80000000); // should print unsigned
         mp_printf(&mp_plat_print, "abc\n%"); // string ends in middle of format specifier
         mp_printf(&mp_plat_print, "%%\n"); // literal % character
+        mp_printf(&mp_plat_print, ".%-3s.\n", "a"); // left adjust
     }
 
     // GC
@@ -475,6 +476,18 @@ static mp_obj_t extra_coverage(void) {
         mp_int_t value_signed;
         mpz_as_int_checked(&mpz, &value_signed);
         mp_printf(&mp_plat_print, "%d\n", (int)value_signed);
+
+        // hash the zero mpz integer
+        mpz_set_from_int(&mpz, 0);
+        mp_printf(&mp_plat_print, "%d\n", mpz_hash(&mpz));
+
+        // convert the mpz zero integer to int
+        mp_printf(&mp_plat_print, "%d\n", mpz_as_int_checked(&mpz, &value_signed));
+        mp_printf(&mp_plat_print, "%d\n", value_signed);
+
+        // mpz_set_from_float with 0 as argument
+        mpz_set_from_float(&mpz, 0);
+        mp_printf(&mp_plat_print, "%f\n", mpz_as_float(&mpz));
     }
 
     // runtime utils
@@ -569,12 +582,24 @@ static mp_obj_t extra_coverage(void) {
         fun_bc.context = &context;
         fun_bc.child_table = NULL;
         fun_bc.bytecode = (const byte *)"\x01"; // just needed for n_state
+        #if MICROPY_PY_SYS_SETTRACE
+        struct _mp_raw_code_t rc = {};
+        fun_bc.rc = &rc;
+        #endif
         mp_code_state_t *code_state = m_new_obj_var(mp_code_state_t, state, mp_obj_t, 1);
         code_state->fun_bc = &fun_bc;
         code_state->ip = (const byte *)"\x00"; // just needed for an invalid opcode
         code_state->sp = &code_state->state[0];
         code_state->exc_sp_idx = 0;
         code_state->old_globals = NULL;
+        #if MICROPY_STACKLESS
+        code_state->prev = NULL;
+        #endif
+        #if MICROPY_PY_SYS_SETTRACE
+        code_state->prev_state = NULL;
+        code_state->frame = NULL;
+        #endif
+
         mp_vm_return_kind_t ret = mp_execute_bytecode(code_state, MP_OBJ_NULL);
         mp_printf(&mp_plat_print, "%d %d\n", ret, mp_obj_get_type(code_state->state[0]) == &mp_type_NotImplementedError);
     }

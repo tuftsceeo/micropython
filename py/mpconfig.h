@@ -426,6 +426,11 @@
 #define MICROPY_EMIT_INLINE_RV32 (0)
 #endif
 
+// Whether to enable the human-readable native instructions emitter
+#ifndef MICROPY_EMIT_NATIVE_DEBUG
+#define MICROPY_EMIT_NATIVE_DEBUG (0)
+#endif
+
 // Convenience definition for whether any native emitter is enabled
 #define MICROPY_EMIT_NATIVE (MICROPY_EMIT_X64 || MICROPY_EMIT_X86 || MICROPY_EMIT_THUMB || MICROPY_EMIT_ARM || MICROPY_EMIT_XTENSA || MICROPY_EMIT_XTENSAWIN || MICROPY_EMIT_RV32 || MICROPY_EMIT_NATIVE_DEBUG)
 
@@ -1321,6 +1326,11 @@ typedef double mp_float_t;
 // Whether to set __file__ for imported modules
 #ifndef MICROPY_PY___FILE__
 #define MICROPY_PY___FILE__ (MICROPY_CONFIG_ROM_LEVEL_AT_LEAST_CORE_FEATURES)
+#endif
+
+// Whether to process __all__ when importing all public symbols from module
+#ifndef MICROPY_MODULE___ALL__
+#define MICROPY_MODULE___ALL__ (MICROPY_CONFIG_ROM_LEVEL_AT_LEAST_BASIC_FEATURES)
 #endif
 
 // Whether to provide mem-info related functions in micropython module
