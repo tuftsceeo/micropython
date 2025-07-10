@@ -180,7 +180,10 @@ Using custom libraries
 
 
 ## sound
-
     import sound
+    s = sound.SOUND()
+    s.play(440,1) # play(frequency, duration) where frequency is the frequency of the sound and duration is the length of the sound
+
+
 
 
