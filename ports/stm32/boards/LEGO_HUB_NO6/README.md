@@ -184,6 +184,10 @@ Using custom libraries
     s = sound.SOUND()
     s.play(440,1) # play(frequency, duration) where frequency is the frequency of the sound and duration is the length of the sound
 
-
+## force
+    import force
+    f = force.FORCE()
+    print(f.touch()) # returns if the force sensor is pressed or not pressed ( 0 OR 1)
+    print(f.force()) # returns the floating point value of force with which the sensor is pressed ( 0 - 10.0) 
 
 
