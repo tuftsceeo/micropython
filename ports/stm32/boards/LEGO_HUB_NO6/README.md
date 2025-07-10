@@ -130,15 +130,27 @@ Hub will appear again as a USB device.  The application firmware is now updated
 and you can remove the firmware.dfu.gz file if desired.
 
 
-# Using custom libraries
+Using custom libraries 
+----------------------------------------------
+
 
 ## buttons
-`import buttons
-`
+
+    import buttons
+
 
 ## led
 
+    import led
+
+
 ## display
 
+    import display
+
+
 ## sound
+
+    import sound
+
 
