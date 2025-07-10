@@ -170,9 +170,13 @@ Using custom libraries
     # battery_led(R,G,B)
 
 
-## display
+## imu
 
-    import display
+    import imu
+    data  = imu.IMU()
+
+    print(data.values()) #returns acceleration in x, y and z directions and gyro data in x, y and z directions.
+    # output looks something like (-254, -56, -16165, 135, -184, 83)
 
 
 ## sound
