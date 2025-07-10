@@ -130,4 +130,15 @@ Hub will appear again as a USB device.  The application firmware is now updated
 and you can remove the firmware.dfu.gz file if desired.
 
 
-Updating MicroPython from the Hub's filesystem
+# Using custom libraries
+
+## buttons
+`import buttons
+`
+
+## led
+
+## display
+
+## sound
+
