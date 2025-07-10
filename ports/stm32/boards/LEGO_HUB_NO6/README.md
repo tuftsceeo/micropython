@@ -150,7 +150,6 @@ Using custom libraries
 ## display
     import display
     dis = display.DISPLAY()
-
     # matrix_led(LED_COLUMN, LED_ROW, BRIGHTNESS)
     # LED_COLUMN = 0 -4
     # LED_ROW = 0 - 4
@@ -162,9 +161,9 @@ Using custom libraries
     # G = 0 - 65535 (Green value)
     # B = 0 - 65535 (Blue value) 
     dis.center(65535, 0, 0)
-    
-    # LEDs you can control
-    # cetner(R,G,B)
+
+    # Other LEDs you can control
+    # center(R,G,B)
     # center_main(R,G,B)
     # center_sub(R,G,B)
     # ble(R,G,B)
