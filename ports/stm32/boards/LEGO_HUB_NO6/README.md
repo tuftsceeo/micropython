@@ -135,9 +135,6 @@ Using custom libraries
 
 
 ## buttons
-code block 
-#       dfadf
-
     import buttons
     btn = buttons.BUTTONS()
     center_button = btn.center() # value of center button 1 when pressed and 0 when not pressed
@@ -150,9 +147,28 @@ code block
 
 
 
-## led
+## display
+    import display
+    dis = display.DISPLAY()
 
-    import led
+    # matrix_led(LED_COLUMN, LED_ROW, BRIGHTNESS)
+    # LED_COLUMN = 0 -4
+    # LED_ROW = 0 - 4
+    # BRIGHTNESS = 0 - 10
+    dis.matrix_led(3,4,10)
+
+    #center(R,G,B)
+    # R = 0 - 65535 (Red value)
+    # G = 0 - 65535 (Green value)
+    # B = 0 - 65535 (Blue value) 
+    dis.center(65535, 0, 0)
+    
+    # LEDs you can control
+    # cetner(R,G,B)
+    # center_main(R,G,B)
+    # center_sub(R,G,B)
+    # ble(R,G,B)
+    # battery_led(R,G,B)
 
 
 ## display

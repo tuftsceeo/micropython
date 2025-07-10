@@ -13,13 +13,19 @@ class DISPLAY():
         self.tlcLat = pyb.Pin(pyb.Pin.board.TLC_LAT, pyb.Pin.OUT, pull= pyb.Pin.PULL_NONE)
         self.gsclk = pyb.Pin(pyb.Pin('B15'),pyb.Pin.ALT, alt=pyb.Pin.AF9_TIM12, pull = pyb.Pin.PULL_NONE)
         
+        
+        self.green_scale = 0.2
+        self.blue_scale = 0.2
         self.spi = pyb.SPI(1, pyb.SPI.CONTROLLER,baudrate = 25000000, polarity=0, phase=0, bits=8, firstbit=pyb.SPI.MSB)
         self.display_on()
-        self.power_led(0,0,1)
+        
+        
+        #self.center(0,0,1)
 
     def set(self, led, value = 256*256-1):
         self.display[led * 2] = value&0xFF
         self.display[led * 2 + 1] = (value >> 8)&0xFF
+        
         
     def pixel_set(self, led, value = 256*256-1):
         if led not in range(len(self.pixel_lut)): return -1
@@ -74,26 +80,40 @@ class DISPLAY():
         self.pixel_set(y*5+x, int(self.fullBrightness*b))
         self.display_update()
         
-    def ble_led(self, r=0, g=1, b=0):
-        self.pixel_set(25, self.fullBrightness*r)
-        self.pixel_set(26, self.fullBrightness*g)
-        self.pixel_set(27, self.fullBrightness*b)
+    def ble(self, r=0, g=0, b=0):
+        self.pixel_set(25, r)
+        self.pixel_set(26, int(self.green_scale * g))
+        self.pixel_set(27, int(self.blue_scale * b))
         self.display_update()
         
-    def power_led(self, r=0, g=0, b=1):
+    def center(self, r=0, g=0, b=0):
         #left and right leds
-        self.pixel_set(28, self.fullBrightness*r)
-        self.pixel_set(29, self.fullBrightness*g)
-        self.pixel_set(30, self.fullBrightness*b)
-        self.pixel_set(31, self.fullBrightness*r)
-        self.pixel_set(32, self.fullBrightness*g)
-        self.pixel_set(33, self.fullBrightness*b)
+        self.pixel_set(28, r)
+        self.pixel_set(29, int(self.green_scale * g))
+        self.pixel_set(30, int(self.blue_scale * b))
+        self.pixel_set(31, r)
+        self.pixel_set(32, int(self.green_scale* g))
+        self.pixel_set(33, int(self.blue_scale * b))
+        self.display_update()
+
+    def center_main(self, r=0, g=0, b=0):
+        #main  led
+        self.pixel_set(28, r)
+        self.pixel_set(29, int(self.green_scale* g))
+        self.pixel_set(30, int(self.blue_scale * b))
+        self.display_update()
+    
+    def center_sub(self, r=0, g=0, b=1):
+        #sub  led
+        self.pixel_set(31, r)
+        self.pixel_set(32, int(self.green_scale* g))
+        self.pixel_set(33, int(self.blue_scale * b))
         self.display_update()
 
     def battery_led(self, r=1, g=0, b=0):
-        self.pixel_set(34, self.fullBrightness*r)
-        self.pixel_set(35, self.fullBrightness*g)
-        self.pixel_set(36, self.fullBrightness*b)
+        self.pixel_set(34, r)
+        self.pixel_set(35, int(self.green_scale * g))
+        self.pixel_set(36, int(self.blue_scale * b))
         self.display_update()
 
     def full_test(self):
@@ -104,3 +124,6 @@ class DISPLAY():
                 time.sleep(0.001)
             time.sleep(0.1)
             if i: self.pixel_set(i-1,0)
+   
+
+
