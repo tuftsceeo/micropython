@@ -135,8 +135,19 @@ Using custom libraries
 
 
 ## buttons
+code block 
+#       dfadf
 
     import buttons
+    btn = buttons.BUTTONS()
+    center_button = btn.center() # value of center button 1 when pressed and 0 when not pressed
+    left_button = btn.left()
+    right_button = btn.right()
+    ble_button = btn.ble()
+    print(f"Center button:{center_button}, Left button:{left_button}, Right button:{right_button}, Ble button:{ble_button}")
+
+
+
 
 
 ## led
