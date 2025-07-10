@@ -128,3 +128,6 @@ At that point the Hub should restart and the LED on the central button will flas
 different colours.  Once the update is complete the LED will stop flashing and the
 Hub will appear again as a USB device.  The application firmware is now updated
 and you can remove the firmware.dfu.gz file if desired.
+
+
+Updating MicroPython from the Hub's filesystem
