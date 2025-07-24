@@ -186,7 +186,7 @@ Using custom libraries
 
 ## force
     import force
-    f = force.FORCE()
+    f = force.FORCE(0) # 0 is Port A, 1 is B etc.
     print(f.touch()) # returns if the force sensor is pressed or not pressed ( 0 OR 1)
     print(f.force()) # returns the floating point value of force with which the sensor is pressed ( 0 - 10.0) 
 
