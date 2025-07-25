@@ -1,5 +1,5 @@
 from machine import Pin
-from LPF2 import LPF2
+from lpf2 import LPF2
 from port import PORT
 import time
 class FORCE():
