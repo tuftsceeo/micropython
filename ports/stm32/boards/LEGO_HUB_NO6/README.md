@@ -212,9 +212,7 @@ Using UART on micropython
 
 Starter code for UART communication
 ## UART
-    from machine import UART, Pin, Timer
-    import time, struct
-    import micropython, gc
+    from machine import UART
     from port import PORT
 
 
