@@ -467,5 +467,6 @@ class LPF2():
         self.uart.deinit()
         self.uart.init(baudrate = 115200, timeout = 200) 
         self.connected = True
-        self.set_mode(self.user_mode)
+        #print("user mode", self.user_mode)
+        #self.set_mode(self.user_mode)
         return True
