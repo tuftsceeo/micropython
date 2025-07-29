@@ -207,5 +207,19 @@ Starter code for I2C communication
     i2c=SoftI2C(freq=10000, scl=a.d1, sda=a.d0, timeout=5000) #timeout in microsecond units # initializes the i2c object
     print(i2c.scan())
 
+Using UART on micropython 
+----------------------------------------------
 
+Starter code for UART communication
+## UART
+    from machine import UART, Pin, Timer
+    import time, struct
+    import micropython, gc
+    from port import PORT
+
+
+    uart = UART(PORT(0).uart) # port A
+    uart.init(baudrate = 115200, timeout = 1000)
+    uart.write("Hello world")
+    print(uart.read(uart.any()))
 
