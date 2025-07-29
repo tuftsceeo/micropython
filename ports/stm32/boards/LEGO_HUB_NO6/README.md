@@ -191,3 +191,21 @@ Using custom libraries
     print(f.force()) # returns the floating point value of force with which the sensor is pressed ( 0 - 10.0) 
 
 
+Using I2C on micropython 
+----------------------------------------------
+You might need to boost the I2C signal coming from the SPIKE Prime Hub
+Go to https://www.instructables.com/PCB-Adapter-LEGO-Bricks-to-Grove-Sensors-1/ for complete instructions on how to make your I2C dongle. 
+
+Starter code for I2C communication
+## i2c
+    from machine import SoftI2C
+    from port import PORT
+
+
+    a = PORT(0) # this would be port A
+    a.enable(1) #enables I2C and disables UART
+    i2c=SoftI2C(freq=10000, scl=a.d1, sda=a.d0, timeout=5000) #timeout in microsecond units # initializes the i2c object
+    print(i2c.scan())
+
+
+
